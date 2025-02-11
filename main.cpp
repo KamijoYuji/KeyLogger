@@ -560,3 +560,65 @@ while (1) {
 }
 return 0;
 }
+
+
+
+
+
+// Online C++ Compiler - Build, Compile and Run your C++ programs online in your favorite browser
+
+#include<iostream>
+#include<string>
+using namespace std;
+
+double sqrt(double in, double eps = 0.000001){
+    double delta = 1.e16;
+    double out = 0.0;
+    while(delta>=eps){
+        while(out*out<in)
+            out+=delta;
+        out -= out*out>in?delta:0;
+        delta/=10;
+    }
+    return out;
+}
+
+class StrD{
+public:
+    string beta;
+    int num;
+    StrD(string beta, int num = 0){
+        this->beta = beta;
+        this->num = num;
+    }
+    StrD(){
+        beta = "0";
+        num = 0;
+    }
+    //123456+7653
+private:
+    void reverse(string &a1){
+        int s = a1.size();
+        for(int i = 0; i < s/2; i++){
+            char a = a1[i];
+            a1[i] = a1[s-1-i];
+            a1[s-1-i] = a;
+        }
+    }
+public:
+    StrD operator +(StrD other){
+        auto a1 = beta;
+        reverse(a1);
+        auto a2 = other.beta;
+        reverse(a2);
+        int i = 0;
+        auto s = a1.size()>a2.size()?a1.size():a2.size();
+        string b('0',s);
+        bool flag = 0;
+        while(a1[i] and a2[i]){
+            b[i] = ((a1[i]-(2*'0')+a2[i])%10)+'0'+flag;
+            flag = b[i]!=(a1[i]+a2[i]-'0');
+        }
+    }
+    
+};
